@@ -99,6 +99,13 @@ If no OpenNI support has been compiled in, the program can be used for offline p
 ```
   $ ./InfiniTAM Teddy/calib.txt Teddy/Frames/%04i.ppm Teddy/Frames/%04i.pgm
 ```
+
+or 
+
+```
+./InfiniTAM.exe C:/Users/Thanh/dev/thirdparty/InfiniTAM/InfiniTAM/Files/PrimeSense/calib.txt C:/Users/Thanh/data/structural_modeling/recording/kinect-white-boxes-2/sensor_recorder_%06i-depth.png C:/Users/Thanh/data/structural_modeling/recording/kinect-white-boxes-2/sensor_recorder_%06i-color.png
+```
+
 The arguments are essentially masks for sprintf and the %04i will be replaced by a running number, accordingly.
 
 

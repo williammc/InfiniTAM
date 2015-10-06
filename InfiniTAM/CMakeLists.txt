@@ -26,7 +26,7 @@ find_package(libuvc QUIET)
 CANONIFY_BOOL(libuvc_FOUND)
 message(STATUS "libuvc found: ${libuvc_FOUND}")
 
-find_package(PNG QUIET)
+find_package(PNG REQUIRED)
 CANONIFY_BOOL(PNG_FOUND)
 message(STATUS "libpng found: ${PNG_FOUND}")
 

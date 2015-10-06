@@ -1,0 +1,68 @@
+#!/bin/bash
+# common place for putting experiment commands
+if [ -z "${1+set}" ]; then # argument 1 is case number
+  echo "Please set argument 1 (command case number)!"
+  exit -1
+fi
+
+fastfusion_root=D:/dev/fastfusion_master
+data_path_prefix=E:  # for windows on office PC
+data_path_prefix=C:/Users/thanh  # for windows on Bootcamp Mac Pro
+# fastfusion_root=C:/Users/thanh/dev/fastfusion_master
+
+datatype="groundtruth"
+# datatype="synthetic"
+#datatype="recording"
+if [ -z "${3+set}" ]; then # argument 2 is data_path
+  case "$datatype" in
+  # if [ $synthetic -eq 1 ]; then
+  "groundtruth")
+    prefix=$data_path_prefix/data/fusion/groundtruth
+    data_path=$prefix/rgbd_dataset_freiburg3_long_office_household
+    ;;
+  "synthetic")
+    prefix=$data_path_prefix/data/rod/synthetic
+    data_path=$prefix/imperial
+
+    rec_file=scene.txt
+    poses_file=groundtruth.txt
+    left_handed_poses=1
+  ;;
+  
+  "recording")
+    prefix=$data_path_prefix/data/rod/recording
+    data_path=$prefix/kinect-white-boxes-2 # good slammap
+    # data_path=$prefix/seminar-3 # good slammap
+    # data_path=$prefix/boxes-1
+
+    rec_file=kinect_recorder.txt
+    poses_file=oslam/oslam.txt
+    left_handed_poses=0
+  ;;
+  esac
+else
+  data_path=$3
+fi 
+
+if [ ! -d $data_path ]; then
+  echo "Given data_path($data_path) doesn't exist or not a directory!"
+  exit -1;
+fi
+
+current_path="${PWD}"
+echo "Case $1"
+
+
+case "$1" in
+
+"inf-fuse")
+ InfiniTAM C:/Users/Thanh/dev/thirdparty/InfiniTAM/InfiniTAM/Files/PrimeSense/calib.txt \
+ $data_path/sensor_recorder_%06i-color.png \
+ $data_path/sensor_recorder_%06i-depth.png
+ ;;
+
+esac
+
+
+cd "$current_path"
+
